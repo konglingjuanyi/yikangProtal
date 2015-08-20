@@ -22,40 +22,40 @@
 <script>
 var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?bfa063bc01b8c0b11ee446bb9d4072a4";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?bfa063bc01b8c0b11ee446bb9d4072a4";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
 })();
 </script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-		<div class="main">
-    	<div style="width:100%; padding-top:20px; position:fixed; z-index:1;; height:70px; background:#FFF;">
-          	<div class="fonts" style=" margin-top:-4px; font-size:1.2em; float:left; text-align:center; padding-left:76px;">
+	<div class="main">
+    	<div id="toptiles1" style="width:100%; padding-top:20px; position:fixed; z-index:1;; height:70px; background:#FFF;">
+          	<div id="titleone" class="fonts" style="margin-top:-4px; float:left; text-align:center; padding-left:76px;">
             	<img style="width:118px; height:38px;" src="img/protal/hlg.png" />
             </div>
-            <div style="width:50px; height:50px; width:200px; text-align:center; margin:auto; margin-top:-3px;">
+            <div id="lefttitle" style="height:50px; width:200px; text-align:center; margin:auto; margin-top:-3px;">
+        		<div id="tanks1"></div>  
             	<img id="imgselectnowone" style=" display:none; width:173px; height:39px;" src="img/protal/fulc.png" />
             	<img id="imgselectnowtwo" style=" display:none; width:173px; height:39px;" src="img/protal/funl.png" />
             </div>
-            <div class="fonts" style=" margin-top:-8px;font-size:1.0em; float:right; padding-right:76px; margin-top:-46px;">
-              	<a href="#01"><img style="width:121px; height:29px;" src="img/protal/fw2.png" /></a>&nbsp;
+            <div id="titletwo" class="fonts" style="margin-top:-8px; float:right; margin-top:-48px; padding-right:70px;">
+              	<a href="#01"><img class="imgs1" style="width:122px; height:29px;" src="img/protal/fw2.png" /></a>&nbsp;
                  &nbsp;
-                <a href="#02"><img style="width:121px; height:29px;" src="img/protal/fw1.png" /></a>
+                <a href="#02"><img class="imgs1" style="width:122px; height:29px;" src="img/protal/fw1.png" /></a>
             </div>
             <div style="margin-top:-17px;">
+            	<div id="toptitlehr"></div>
                	<hr style="height:1px;border:none;border-top:1px solid  #0066CC;" />
             </div>
       	</div>
-            <div class="div1_1" id="pagemain">
-              	<br />
-               	<img id="images1" src="img/protal/WEB.jpg" />
-               	<img id="images2" style="display:none;" src="img/protal/phone/banner.jpg" />
-           	</div>
-    	</div>
-    	<div style="height:1000px;" class="dv1" style="">
+        <div class="div1_1" id="pa" >
+           	<img id="images1" style="width:100%; height:100%;" src="img/protal/WEB.jpg" />
+           	<img id="images2" style="width:100%; height:100%; display:none;" src="img/protal/phone/banner.jpg" />
+        </div>
+    	<div style="height:1000px;" class="dv1">
         	<a name="01"></a>
         	<div class="d1" style="width:80%; height:70%; margin:0 auto; position:relative; top:15%; background:url(img/protal/servicebackground.png); padding-top: 130px;">
             	<div class="ds" style="width:33%; height:400px; float:left; text-align:center;">
@@ -67,7 +67,7 @@ var _hmt = _hmt || [];
                     	<img style="width:194px; height:51px; margin-top:10px;" src="img/protal/pg2.png" />
                     </div>
                 </div>
-                <div class="ds" style="width:33%; height:400px; float:left; text-align:center;">
+                <div class="ds" style=" width:33%; height:400px; float:left; text-align:center;">
                     <img style="width:310px; height:310px; margin-top:10px;" src="img/protal/rupg.png" />
                     <div style="text-align:center;">
                     	<img style="width:211px; height:36px; margin-top:10px;" src="img/protal/rhpg1.png" />
@@ -170,17 +170,27 @@ var _hmt = _hmt || [];
                 </div>
             </div>
         </div>
+        </div>
     	
-		<script> 
+		<script>
 			window.onscroll = now;
 			$(document).ready(function(){
+				var width = $(window).width();
+				var heigth = $(window).height();
+				//alert("当前的宽"+parseInt(width)+"，当前的高"+parseInt(heigth));
 				var infoanimateLeft = parseInt(screen.height); // 获得当前分辨率
 				var bigimg = document.getElementById("#midtopimg");
 				
-				if(parseInt(infoanimateLeft) <= 720){
-					alert("显示器分辨率是："+infoanimateLeft+" 执行小于768方案");
-					$(".fonts").css({"font-size":"0.8em"})
-					$(".fonts img").css({"width":"98","height":"30","padding":"0px 0px 0px 0px;"})
+				if(heigth >= width){
+					//alert("执行手机方案");
+					$("#tanks1").css({"height":"12"});
+					$("#toptitlehr").css({"height":"88"});
+					$("#toptiles1").css({"height":"110"});
+					$(".imgs1").css({"display":"none"});
+					$(".fonts img").css({"width":"230","height":"72"});
+					$("#titleone").css({"padding-left":"14px;"});
+					$("#lefts").css({"padding-left":"-160"});
+					$("#rights").css({"padding-right":"-160"});
 					$(".ds").css({"float":"none","margin":"0 auto","width":"100%","height":"440"});
 					$("#images1").css({"display":"none"});
 					$("#images2").css({"display":"block"});
@@ -191,22 +201,42 @@ var _hmt = _hmt || [];
 					$(".d3").css({"height":"2700"});
 					$("#bottomtitle").css({"width":"75%","height":"270"});
 					$(".bottom1").css({"display":"none"});
+					$("#lefttitle").css({"float":"right","width":"300"});
+					$("#lefttitle img").css({"width":"230","height":"58","margin-top":"10"});
 				}
 			});
-			
+
 			function now(){
 				var top = document.body.scrollTop;
-				if(top < 900){
-					$("#imgselectnowone").css({"display":"none"})
-					$("#imgselectnowtwo").css({"display":"none"})
+				var widthone = $(window).width();
+				var heigthtwo = $(window).height();
+				if(widthone >= heigthtwo){
+					if(top < 840){
+						$("#imgselectnowone").css({"display":"none"});
+						$("#imgselectnowtwo").css({"display":"none"});
+					}
+					if(top >= 840 && top < 1700) {
+						$("#imgselectnowone").css({"display":"block"});
+						$("#imgselectnowtwo").css({"display":"none"});
+					}
+					if(top >= 1700) {
+						$("#imgselectnowone").css({"display":"none"});
+						$("#imgselectnowtwo").css({"display":"block"});
+					}
 				}
-				if(top >= 900 && top < 1900) {
-					$("#imgselectnowone").css({"display":"block"})
-					$("#imgselectnowtwo").css({"display":"none"})
-				}
-				if(top >= 1900) {
-					$("#imgselectnowone").css({"display":"none"})
-					$("#imgselectnowtwo").css({"display":"block"})
+				if(widthone <= heigthtwo){
+					if(top < 1200){
+						$("#imgselectnowone").css({"display":"none"});
+						$("#imgselectnowtwo").css({"display":"none"});
+					}
+					if(top >= 1200 && top < 2900) {
+						$("#imgselectnowone").css({"display":"block"});
+						$("#imgselectnowtwo").css({"display":"none"});
+					}
+					if(top >= 2800) {
+						$("#imgselectnowone").css({"display":"none"});
+						$("#imgselectnowtwo").css({"display":"block"});
+					}
 				}
 			}
 		</script>
