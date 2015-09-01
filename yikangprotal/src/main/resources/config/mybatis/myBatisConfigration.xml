@@ -9,7 +9,7 @@
 
 	
 	<plugins>
-		<plugin interceptor="com.flyjaky.supermarket.common.page.MysqlPaginationPlugin">
+		<plugin interceptor="com.yikang.protal.common.page.MysqlPaginationPlugin">
 			<property name="sqlIdRegex" value=".*Page$" />
 		</plugin>
 	</plugins>

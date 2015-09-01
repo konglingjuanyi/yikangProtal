@@ -21,7 +21,7 @@
         
         <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         	<property name="order" value="1"></property>
-        	<property name="basePackage" value="com.flyjaky.supermarket.controller"></property>
+        	<property name="basePackage" value="com.yikang.protal.controller"></property>
         	<property name="caseSensitive" value="true"></property>
         </bean>   
         

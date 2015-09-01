@@ -62,7 +62,7 @@
   
   <aop:config>    
 <!--     把事务控制在Service层 -->
-    <aop:pointcut id="ylyjakyTxAdvicePointCut" expression="execution(public * com.flyjaky.supermarket.service.*.*(..))" /> 
+    <aop:pointcut id="ylyjakyTxAdvicePointCut" expression="execution(public * com.yikang.protal.service.*.*(..))" /> 
     <aop:advisor pointcut-ref="ylyjakyTxAdvicePointCut" advice-ref="ylyjakyTxAdvice" />
   </aop:config>
 	

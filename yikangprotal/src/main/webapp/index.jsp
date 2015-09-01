@@ -46,6 +46,16 @@ var _hmt = _hmt || [];
                  &nbsp;
                 <a href="#02"><img class="imgs1" style="width:122px; height:29px;" src="img/protal/fw1.png" /></a>
             </div>
+			<div id="Boom" style=" width:100%; background:#E4E5E3; text-align:center; position:absolute; top:70px; margin-top:1px;">
+            	<div style="float:left; width:75%">
+            		<img style="position:relative; top:0px; left:-70px;" src="img/protal/banner.png"  />
+                </div>
+            	<div style="float:left; width:25%">
+                    <a name="Boom" style="cursor:pointer;" onclick="Boom()">
+                        <img id="x" style="position:relative; top:22px;" src="img/protal/cancel.png"  />
+                    </a>
+                </div>
+        	</div>
             <div style="margin-top:-17px;">
             	<div id="toptitlehr"></div>
                	<hr style="height:1px;border:none;border-top:1px solid  #0066CC;" />
@@ -203,8 +213,14 @@ var _hmt = _hmt || [];
 					$(".bottom1").css({"display":"none"});
 					$("#lefttitle").css({"float":"right","width":"300"});
 					$("#lefttitle img").css({"width":"230","height":"58","margin-top":"10"});
+					$("#Boom").css({"margin-top":"45px"});
+					$("#x").css({"margin-top":"40px"});
 				}
 			});
+			
+			function Boom(){
+				$("#Boom").css({"display":"none"});
+			}
 
 			function now(){
 				var top = document.body.scrollTop;

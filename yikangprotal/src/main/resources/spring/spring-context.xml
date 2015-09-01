@@ -15,19 +15,12 @@
 	</context:component-scan>
 
 
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-
+	<bean 	class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
-
 			<list>
-
 				<ref bean="jsonHttpMessageConverter" />
-
 			</list>
-
 		</property>
-
 	</bean>
 
 	<bean id="stringHttpMessageConverter"
