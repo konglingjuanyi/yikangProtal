@@ -1,7 +1,8 @@
 package com.yikang.protal.manager;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.yikang.protal.dao.UserFromDao;
 import com.yikang.protal.entity.UserFrom;
 
@@ -10,7 +11,7 @@ import com.yikang.protal.entity.UserFrom;
 public class UserFromManager {
 
 	
-	@Resource
+	@Autowired
 	private UserFromDao userFromDao;
 	
 	

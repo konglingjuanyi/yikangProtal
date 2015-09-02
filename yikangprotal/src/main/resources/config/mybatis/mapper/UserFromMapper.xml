@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yikangyiliao.pension.dao.UserFromDao" >
-  <resultMap id="BaseResultMap" type="com.yikangyiliao.pension.entity.UserFrom" >
+<mapper namespace="com.yikang.protal.dao.UserFromDao" >
+  <resultMap id="BaseResultMap" type="com.yikang.protal.entity.UserFrom" >
     <id column="user_from_id" property="userFromId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="user_from" property="userFrom" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
     delete from user_froms
     where user_from_id = #{userFromId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.yikangyiliao.pension.entity.UserFrom" >
+  <insert id="insert" parameterType="com.yikang.protal.entity.UserFrom" >
     insert into user_froms (user_from_id, user_id, user_from, 
       from_url, numbers, create_time, 
       update_time, active_time)
@@ -32,7 +32,7 @@
       #{fromUrl,jdbcType=VARCHAR}, #{numbers,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=BIGINT}, #{activeTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.yikangyiliao.pension.entity.UserFrom" >
+  <insert id="insertSelective" parameterType="com.yikang.protal.entity.UserFrom" >
     insert into user_froms
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userFromId != null" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yikangyiliao.pension.entity.UserFrom" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.yikang.protal.entity.UserFrom" >
     update user_froms
     <set >
       <if test="userId != null" >
@@ -114,7 +114,7 @@
     </set>
     where user_from_id = #{userFromId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yikangyiliao.pension.entity.UserFrom" >
+  <update id="updateByPrimaryKey" parameterType="com.yikang.protal.entity.UserFrom" >
     update user_froms
     set user_id = #{userId,jdbcType=BIGINT},
       user_from = #{userFrom,jdbcType=VARCHAR},

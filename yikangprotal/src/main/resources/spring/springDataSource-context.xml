@@ -30,9 +30,9 @@
 		<property name="mapperLocations" value="/WEB-INF/classes/config/mybatis/mapper/*.xml" />
 <!-- 		<property name="typeAliasesPackage" value="com.flyjaky.supermarket.dao" /> -->
 	</bean>
-
+<!-- dao 扫描地址 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.flyjaky.supermarket.dao"></property>
+		<property name="basePackage" value="com.yikang.protal.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 	
