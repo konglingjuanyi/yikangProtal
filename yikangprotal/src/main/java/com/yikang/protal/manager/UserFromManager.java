@@ -1,13 +1,13 @@
 package com.yikang.protal.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.yikang.protal.dao.UserFromDao;
 import com.yikang.protal.entity.UserFrom;
 
 
-@Repository
+@Component
 public class UserFromManager {
 
 	

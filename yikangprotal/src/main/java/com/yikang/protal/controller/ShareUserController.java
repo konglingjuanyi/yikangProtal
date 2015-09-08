@@ -1,14 +1,16 @@
 package com.yikang.protal.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +29,10 @@ import com.yikang.protal.service.UserService;
 @Controller
 public class ShareUserController {
 
-	@Resource
+	@Autowired
 	private ShareUserService shareUserService;
 
-	@Resource
+	@Autowired
 	private UserService userService;
 
 	/**
@@ -44,33 +46,38 @@ public class ShareUserController {
 	public Map<String, Object> regiestUser(ModelMap modelMap, String mobileNumber, String captcha, String userFromStr, HttpServletRequest request) {
 
 		Map<String, Object> rtnData = new HashMap<String, Object>();
-		String sesionCaptcha = request.getSession().getAttribute("captcha").toString();
-
-		if (null != mobileNumber && null != captcha && null != sesionCaptcha) {
-
-			Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-			Matcher matcher = p.matcher(mobileNumber);
-			if (matcher.matches()) {
-				if (captcha.equals(sesionCaptcha)) {
-					if (shareUserService.saveShareUser(mobileNumber,userFromStr, request)) {
-						rtnData.put("status",ExceptionConstants.responseSuccess.responseSuccess.code);
-						rtnData.put("message", "恭喜，您领取成功！稍等，我们有服务人员跟，您联系。谢谢！");
+		String sesionCaptcha = null;
+		if(null != request.getSession().getAttribute("captcha")){
+				sesionCaptcha=request.getSession().getAttribute("captcha").toString();
+			if (null != mobileNumber && null != captcha && null != sesionCaptcha) {
+	
+//				Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+//				Matcher matcher = p.matcher(mobileNumber);
+//				if (matcher.matches()) {
+					if (captcha.equals(sesionCaptcha)) {
+						if (shareUserService.saveShareUser(mobileNumber,userFromStr, request)) {
+							rtnData.put("status",ExceptionConstants.responseSuccess.responseSuccess.code);
+							rtnData.put("message", "恭喜，您领取成功！稍等，我们有服务人员跟，您联系。谢谢！");
+						} else {
+							rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
+							rtnData.put("message", "用户已经注册！");
+						}
+	
 					} else {
 						rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
-						rtnData.put("message", "用户已经注册！");
+						rtnData.put("message", "抱歉，你的验证码，输入错误!");
 					}
-
-				} else {
-					rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
-					rtnData.put("message", "抱歉，你的验证码，输入错误!");
-				}
-			} else {
+//				} else {
+//					rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
+//					rtnData.put("message", "请输入正确的手机号！");
+//				}
+			}else{
 				rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
-				rtnData.put("message", "请输入正确的手机号！");
+				rtnData.put("message", "请输入手机号 或验证码  ！");
 			}
 		}else{
 			rtnData.put("status",ExceptionConstants.systemException.systemException.errorCode);
-			rtnData.put("message", "请输入手机号 或验证码  ！");
+			rtnData.put("message", "还未获取验证码 ！");
 		}
 
 		return rtnData;
@@ -105,19 +112,61 @@ public class ShareUserController {
 
 		Random random = new Random();
 		int captcha = random.nextInt(99999);
-
-		request.getSession().setAttribute("captcha", captcha);
-
-		if (SMSUtil.sendMessage(mobileNumber, captcha + "", 1 + "")) {
-			rtnData.put("status",
-					ExceptionConstants.responseSuccess.responseSuccess.code);
-			rtnData.put("message", "您的验证码，已经发送！请注意，手机提醒！");
-		} else {
+		
+		Date currentDate=Calendar.getInstance().getTime();
+		Date getDate=(Date) request.getSession().getAttribute("getCaptchaDate");
+		boolean isTure=false;
+		if(null != getDate){
+			   long diff = currentDate.getTime() - getDate.getTime();
+			    long days = diff / (1000 * 60 );
+			    if(days>1){
+			    	isTure=true;
+			    }
+		}
+		
+//		Pattern p = Pattern
+//				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+//		Matcher matcher = p.matcher(mobileNumber);
+//		if(!matcher.matches()){
+//			rtnData.put(
+//					"status",
+//					ExceptionConstants.systemException.systemException.errorCode);
+//			rtnData.put("message", "手机号输入不正确");
+//			return rtnData;
+//		}
+		
+		if(getDate==null || isTure){
+			
+			if(userService.validateMoblieNumber(mobileNumber)){
+				if (SMSUtil.sendMessage(mobileNumber, captcha + "", 1 + "")) {
+					
+					request.getSession().setAttribute("captcha", captcha);
+					request.getSession().setAttribute("getCaptchaDate", currentDate);
+					
+					rtnData.put("status",
+							ExceptionConstants.responseSuccess.responseSuccess.code);
+					rtnData.put("message", "您的验证码，已经发送！请注意，手机提醒！");
+				} else {
+					rtnData.put(
+							"status",
+							ExceptionConstants.systemException.systemException.errorCode);
+					rtnData.put("message", "抱歉，验证码发送失败！请您联系服务人员！");
+				}
+			}else{
+				rtnData.put(
+						"status",
+						ExceptionConstants.systemException.systemException.errorCode);
+				rtnData.put("message", "用户已经领取！");
+			}
+		}else{
 			rtnData.put(
 					"status",
 					ExceptionConstants.systemException.systemException.errorCode);
-			rtnData.put("message", "抱歉，验证码发送失败！请您联系服务人员！");
+			rtnData.put("message", "请1分钟后在获取！");
 		}
+		
+		
+
 		return rtnData;
 	}
 
@@ -181,8 +230,4 @@ public class ShareUserController {
 
 	}
 
-	public static void main(String[] args) {
-		Random random = new Random();
-		System.out.println(random.nextInt(999999));
-	}
 }

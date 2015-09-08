@@ -1,5 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/common/head.jsp"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,13 +46,13 @@ var _hmt = _hmt || [];
                  &nbsp;
                 <a href="#02"><img class="imgs1" style="width:122px; height:29px;" src="img/protal/fw1.png" /></a>
             </div>
-			<div id="Boom" style=" width:100%; background:#E4E5E3; text-align:center; position:absolute; top:70px; margin-top:1px;">
-            	<div style="float:left; width:75%">
-            		<img style="position:relative; top:0px; left:-70px;" src="img/protal/banner.png"  />
+            <div id="Boom" style=" width:100%; background:#E4E5E3; text-align:center; position:absolute; top:70px; margin-top:1px;">
+            	<div class="bennerone" style="float:left; width:80%;">
+            		<img class="benner" style="width:1200px; margin-left:50px;" src="img/protal/banner.png"  />
                 </div>
-            	<div style="float:left; width:25%">
+            	<div style="float:left; width:32px; height:32px; position:relative; top:22px;">
                     <a name="Boom" style="cursor:pointer;" onclick="Boom()">
-                        <img id="x" style="position:relative; top:22px;" src="img/protal/cancel.png"  />
+                        <img  class="closes" src="img/protal/cancel.png"  />
                     </a>
                 </div>
         	</div>
@@ -208,8 +213,9 @@ var _hmt = _hmt || [];
 					$(".bottom1").css({"display":"none"});
 					$("#lefttitle").css({"float":"right","width":"300"});
 					$("#lefttitle img").css({"width":"230","height":"58","margin-top":"10"});
-					$("#Boom").css({"margin-top":"45px"});
-					$("#x").css({"margin-top":"40px"});
+					$("#Boom").css({"margin-top":"45px","height":"160px;"});
+					$(".closes").css({"margin-top":"-10px","margin-left":"80px"});
+					$(".benner").css({"margin-left":"0px","width":"900px"});
 				}
 			});
 			

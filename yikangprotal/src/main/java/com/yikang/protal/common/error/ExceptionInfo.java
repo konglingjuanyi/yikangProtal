@@ -1,7 +1,5 @@
 package com.yikang.protal.common.error;
 
-import java.util.HashMap;
-import java.util.Map;
 
 
 
@@ -19,7 +17,7 @@ import java.util.Map;
 public class ExceptionInfo {
 	
 	
-	private Map<String,String> errorMessages=new HashMap<String,String>();
+//	private Map<String,String> errorMessages=new HashMap<String,String>();
 	
 	
 	

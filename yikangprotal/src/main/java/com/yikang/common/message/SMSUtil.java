@@ -1,8 +1,6 @@
 package com.yikang.common.message;
 
 import java.util.HashMap;
-import java.util.Set;
-
 import com.cloopen.rest.sdk.CCPRestSDK;
 
 /**
@@ -29,11 +27,14 @@ public class SMSUtil {
 		HashMap<String, Object> result = null;
 
 		CCPRestSDK restAPI = new CCPRestSDK();
-		restAPI.init("app.cloopen.com", "8883");// 初始化服务器地址和端口，格式如下，服务器地址不需要写https://
+		//测试
+		//restAPI.init("sandboxapp.cloopen.com", "8883");// 初始化服务器地址和端口，格式如下，服务器地址不需要写https://
+		//线上
+		restAPI.init("app.cloopen.com", "8883");
 		restAPI.setAccount("aaf98f894f73de3f014f87eed2540e2e", "01f347c0e8b8422d9b5db930098ea179");// 初始化主帐号和主帐号TOKEN
 		restAPI.setAppId("8a48b5514f73ea32014f87f0ff9b280e");// 初始化应用ID
 		//result = restAPI.sendTemplateSMS("号码1,号码2等","模板Id" ,new String[]{"模板内容1","模板内容2"});
-		result = restAPI.sendTemplateSMS(mobilePhoneNumber,"1" ,new String[]{captcha,waitTime});
+		result = restAPI.sendTemplateSMS(mobilePhoneNumber,"35100" ,new String[]{captcha,waitTime});
 
 		System.out.println("SDKTestSendTemplateSMS result=" + result);
 		if("000000".equals(result.get("statusCode"))){

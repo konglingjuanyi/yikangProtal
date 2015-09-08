@@ -2,11 +2,11 @@ package com.yikang.protal.service;
 
 import java.util.Calendar;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.yikang.protal.entity.User;
 import com.yikang.protal.entity.UserFrom;
@@ -14,15 +14,15 @@ import com.yikang.protal.manager.UserFromManager;
 import com.yikang.protal.manager.UserManager;
 
 
-@Repository
+@Component
 public class ShareUserService {
 	
 	private final static Logger logger=Logger.getLogger(ShareUserService.class);
 
-	@Resource
+	@Autowired
 	private UserManager userManager;
 	
-	@Resource
+	@Autowired
 	private UserFromManager userFromManager;
 	
 	
@@ -45,6 +45,7 @@ public class ShareUserService {
 			user.setSalt("000000");
 			user.setLoginPassword("99999999");
 			user.setAccessTiket("999999999");
+			user.setLoginTime(curentDateTime);
 			
 			int userCount=userManager.insertUserSelective(user);
 			
@@ -58,7 +59,7 @@ public class ShareUserService {
 			userFrom.setNumbers(0l);
 			userFrom.setCreateTime(curentDateTime);
 			userFrom.setUpdateTime(curentDateTime);
-			userFrom.setUserFrom(userFromStr);
+			userFrom.setUserFrom(userFromStr==null?"-1":userFromStr);
 			
 			int userFromCount=userFromManager.insertSelective(userFrom);
 			
