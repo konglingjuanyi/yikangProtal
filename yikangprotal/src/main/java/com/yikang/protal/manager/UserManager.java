@@ -1,5 +1,8 @@
 package com.yikang.protal.manager;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.yikang.protal.dao.UserDao;
 import com.yikang.protal.dao.UserInfoDao;
+import com.yikang.protal.dao.UserLinkStatuDao;
 import com.yikang.protal.entity.User;
+import com.yikang.protal.entity.UserLinkStatu;
 
 
 @Component
@@ -19,6 +24,9 @@ public class UserManager {
 	
 	@Autowired
 	private UserInfoDao userInfoDao;
+	
+	@Autowired
+	private UserLinkStatuDao userLinkStatuDao;
 	
 	
 	
@@ -62,5 +70,25 @@ public class UserManager {
 		return userDao.getUserByLoginName(loginName);
 	}
 	
+	
+	public List<Map<String,Object>> getUserLinkUserStatus(){
+		return userLinkStatuDao.getUserLinkUserStatus();
+	}
+	
+	
+	/**
+	 *修改用户的联系状态
+	 * */
+	public int updateUserLinkStatus(Long userId){
+		
+		Date currentDateTime=Calendar.getInstance().getTime();
+
+		UserLinkStatu userLinkStatu =new UserLinkStatu();
+		userLinkStatu.setLinkUserId(userId);
+		userLinkStatu.setCreateTime(currentDateTime);
+		userLinkStatu.setUserLinkStatus(Byte.valueOf("1"));
+		
+		return userLinkStatuDao.insert(userLinkStatu);
+	}
 	
 }
