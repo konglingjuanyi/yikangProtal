@@ -37,7 +37,7 @@ var _hmt = _hmt || [];
             	<img style="width:118px; height:38px;" src="img/protal/hlg.png" />
             </div>
             <div id="lefttitle" style="height:50px; width:200px; text-align:center; margin:auto; margin-top:-3px;">
-        		<div id="tanks1"></div>  
+        		<div id="tanks1"></div>
             	<img id="imgselectnowone" style=" display:none; width:173px; height:39px;" src="img/protal/fulc.png" />
             	<img id="imgselectnowtwo" style=" display:none; width:173px; height:39px;" src="img/protal/funl.png" />
             </div>
@@ -48,11 +48,11 @@ var _hmt = _hmt || [];
             </div>
             <div id="Boom" style=" width:100%; background:#E4E5E3; text-align:center; position:absolute; top:70px; margin-top:1px;">
             	<div class="bennerone" style="float:left; width:80%;">
-            		<img class="benner" style="width:1200px; margin-left:50px;" src="img/protal/banner.png"  />
+            		<img class="benner" style="width:1200px;" src="img/protal/banner.png"  />
                 </div>
             	<div style="float:left; width:32px; height:32px; position:relative; top:22px;">
                     <a name="Boom" style="cursor:pointer;" onclick="Boom()">
-                        <img  class="closes" src="img/protal/cancel.png"  />
+                        <img class="closes" styel="margin-top:12px;" src="img/protal/cancel.png"  />
                     </a>
                 </div>
         	</div>
@@ -179,9 +179,16 @@ var _hmt = _hmt || [];
                     </div>
                 </div>
             </div>
+            <!-- 二维码 -->
+            <div style="padding:10px; width:300px; height:50px;
+            			background:#91A9BB;
+                        border: 1px solid #5383CA;
+                        border-top-left-radius: 15px; 
+                        border-bottom-left-radius:  15px;  
+                        width:220px; height:276px; position:fixed;right:0;top:220px;">
+            	<img src="img/protal/202.png" />
+            </div>
         </div>
-        </div>
-    	
 		<script>
 			window.onscroll = now;
 			$(document).ready(function(){
@@ -213,9 +220,9 @@ var _hmt = _hmt || [];
 					$(".bottom1").css({"display":"none"});
 					$("#lefttitle").css({"float":"right","width":"300"});
 					$("#lefttitle img").css({"width":"230","height":"58","margin-top":"10"});
-					$("#Boom").css({"margin-top":"45px","height":"160px;"});
-					$(".closes").css({"margin-top":"-10px","margin-left":"80px"});
-					$(".benner").css({"margin-left":"0px","width":"900px"});
+					$("#Boom").css({"margin-top":"30px"});
+					$("#x").css({"margin-top":"8px"});
+					$(".benner").css({"margin-left":"-100px"})
 				}
 			});
 			
@@ -242,20 +249,21 @@ var _hmt = _hmt || [];
 					}
 				}
 				if(widthone <= heigthtwo){
-					if(top < 1200){
+					if(top < 900){
 						$("#imgselectnowone").css({"display":"none"});
 						$("#imgselectnowtwo").css({"display":"none"});
 					}
-					if(top >= 1200 && top < 2900) {
+					if(top >= 900 && top < 2500) {
 						$("#imgselectnowone").css({"display":"block"});
 						$("#imgselectnowtwo").css({"display":"none"});
 					}
-					if(top >= 2800) {
+					if(top >= 2500) {
 						$("#imgselectnowone").css({"display":"none"});
 						$("#imgselectnowtwo").css({"display":"block"});
 					}
 				}
 			}
 		</script>
+  	</div>
 </body>
 </html>
