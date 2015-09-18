@@ -45,7 +45,9 @@
 										<td><a href="">${user.user_id}</a></td>
 										<td>${user.user_name}</td>
 										<td>${user.user_status_id eq null ?"<font color='red'>未联系</font>":"<font color='green'>已经联系</font>"}</td>
-										<td>${user.create_time }</td>
+										<td>
+											${user.create_time }
+										</td>
 										<td>
 											<c:if test="${user.user_status_id eq null}">
 												<a onclick="userStatus.updateUserLinkStatus(${user.user_id})"

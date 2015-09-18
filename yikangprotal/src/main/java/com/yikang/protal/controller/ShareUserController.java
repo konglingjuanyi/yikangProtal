@@ -96,6 +96,20 @@ public class ShareUserController {
 
 		return "shareUser/getYouHui";
 	}
+	
+	
+	/**
+	 * @author liushuaic
+	 * @date 2015/09/18 23:01
+	 * @desc 中秋活动页面
+	 * 
+	 * */
+	@RequestMapping(value="/WeChartActivity")
+	public String toWeChartActivity(ModelMap modelMap, String userFromStr){
+		modelMap.put("userFromStr", userFromStr);
+		return "shareUser/WeChatActivity";
+	}
+	
 
 	/**
 	 * @author liushuaic
@@ -108,64 +122,70 @@ public class ShareUserController {
 	public Map<String, Object> getCaptcha(ModelMap modelMap,
 			String mobileNumber, HttpServletRequest request) {
 
+		
 		Map<String, Object> rtnData = new HashMap<String, Object>();
-
-		Random random = new Random();
-		int captcha = random.nextInt(99999);
-		
-		Date currentDate=Calendar.getInstance().getTime();
-		Date getDate=(Date) request.getSession().getAttribute("getCaptchaDate");
-		boolean isTure=false;
-		if(null != getDate){
-			   long diff = currentDate.getTime() - getDate.getTime();
-			    long days = diff / (1000 * 60 );
-			    if(days>1){
-			    	isTure=true;
-			    }
-		}
-		
-//		Pattern p = Pattern
-//				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-//		Matcher matcher = p.matcher(mobileNumber);
-//		if(!matcher.matches()){
-//			rtnData.put(
-//					"status",
-//					ExceptionConstants.systemException.systemException.errorCode);
-//			rtnData.put("message", "手机号输入不正确");
-//			return rtnData;
-//		}
-		
-		if(getDate==null || isTure){
+		if(null != mobileNumber && mobileNumber.length()==11){
 			
-			if(userService.validateMoblieNumber(mobileNumber)){
-				if (SMSUtil.sendMessage(mobileNumber, captcha + "", 1 + "")) {
-					
-					request.getSession().setAttribute("captcha", captcha);
-					request.getSession().setAttribute("getCaptchaDate", currentDate);
-					
-					rtnData.put("status",
-							ExceptionConstants.responseSuccess.responseSuccess.code);
-					rtnData.put("message", "您的验证码，已经发送！请注意，手机提醒！");
-				} else {
+	
+			Random random = new Random();
+			int captcha = random.nextInt(99999);
+			
+			Date currentDate=Calendar.getInstance().getTime();
+			Date getDate=(Date) request.getSession().getAttribute("getCaptchaDate");
+			boolean isTure=false;
+			if(null != getDate){
+				   long diff = currentDate.getTime() - getDate.getTime();
+				    long days = diff / (1000 * 60 );
+				    if(days>1){
+				    	isTure=true;
+				    }
+			}
+			
+	//		Pattern p = Pattern
+	//				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+	//		Matcher matcher = p.matcher(mobileNumber);
+	//		if(!matcher.matches()){
+	//			rtnData.put(
+	//					"status",
+	//					ExceptionConstants.systemException.systemException.errorCode);
+	//			rtnData.put("message", "手机号输入不正确");
+	//			return rtnData;
+	//		}
+			
+			if(getDate==null || isTure){
+				
+				if(userService.validateMoblieNumber(mobileNumber)){
+					if (SMSUtil.sendMessage(mobileNumber, captcha + "", 1 + "")) {
+						
+						request.getSession().setAttribute("captcha", captcha);
+						request.getSession().setAttribute("getCaptchaDate", currentDate);
+						
+						rtnData.put("status",
+								ExceptionConstants.responseSuccess.responseSuccess.code);
+						rtnData.put("message", "您的验证码，已经发送！请注意，手机提醒！");
+					} else {
+						rtnData.put(
+								"status",
+								ExceptionConstants.systemException.systemException.errorCode);
+						rtnData.put("message", "抱歉，验证码发送失败！请您联系服务人员！");
+					}
+				}else{
 					rtnData.put(
 							"status",
 							ExceptionConstants.systemException.systemException.errorCode);
-					rtnData.put("message", "抱歉，验证码发送失败！请您联系服务人员！");
+					rtnData.put("message", "用户已经领取！");
 				}
 			}else{
 				rtnData.put(
 						"status",
 						ExceptionConstants.systemException.systemException.errorCode);
-				rtnData.put("message", "用户已经领取！");
+				rtnData.put("message", "请1分钟后在获取！");
 			}
+		
 		}else{
-			rtnData.put(
-					"status",
-					ExceptionConstants.systemException.systemException.errorCode);
-			rtnData.put("message", "请1分钟后在获取！");
+			rtnData.put( "status", ExceptionConstants.systemException.systemException.errorCode);
+			rtnData.put("message", "请输入正确的手机号！");
 		}
-		
-		
 
 		return rtnData;
 	}
