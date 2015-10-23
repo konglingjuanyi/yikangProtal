@@ -12,7 +12,7 @@
 
 <title>易康美辰</title>
 
-<link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="css/protal/smallScreen.css" />
+<link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="/css/protal/smallScreen.css" />
 
 
 
@@ -134,7 +134,7 @@ input {
 }
 </style>
 
-<script type="text/javascript" src="<%=path%>/js/views/shareUser/getYouHui.js"></script>
+<script type="text/javascript" src="<%=path%>/js/views/shareUser/appointment.js"></script>
 
 </head>
 <body>
@@ -163,13 +163,13 @@ input {
 					<button id="input_heightthree"
 						style="float: right; background:#FDB337; border: 0px; font-size:27px;"
 						class="btn btn-primary col-md-5 col-sm-5 col-xs-5 inp_fonts"
-						onclick="youHui.getCaptcha()" data-toggle="modal"
+						onclick="appointment.getCaptcha()" data-toggle="modal"
 						data-target="#myModal">获取验证码</button>
 				</p>
 				<p>
 				<button id="input_heightfour" style="background: #FDB337; font-size:27px;"
 					type="button" class="btn btn-lg col-md-12 col-sm-12 col-xs-12 inp_fonts"
-					onclick="youHui.saveYouHui()">预约</button>
+					onclick="appointment.saveYouHui()">预约</button>
 				</p>
 			</form>
 		</div>

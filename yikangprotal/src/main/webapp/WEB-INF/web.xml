@@ -19,10 +19,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<filter>
-		<filter-name>loginFilter</filter-name>
-		<filter-class>com.yikang.filter.LoginFilter</filter-class>
-	</filter>
+<!-- 	<filter> -->
+<!-- 		<filter-name>loginFilter</filter-name> -->
+<!-- 		<filter-class>com.yikang.filter.LoginFilter</filter-class> -->
+<!-- 	</filter> -->
 
 	<!-- <filter-mapping> -->
 	<!-- <filter-name>loginFilter</filter-name> -->
